@@ -1,6 +1,7 @@
 {
   "name": "frappe-gantt-react",
-  "version": "1.0.0",
+  "version": "0.0.7",
+  "typings": "./dist/index.d.ts",
   "scripts": {
     "build": "webpack --config webpack.config.babel.js",
     "release": "webpack --p --config webpack.config.babel.js",
