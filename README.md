@@ -9,7 +9,7 @@ For the live demo, you can check their live demo [here](https://frappe.github.io
 
 or
 
-> npm install frappe-gantt-react
+> yarn add frappe-gantt-react
 
 ## Usage
 Import it to your project
