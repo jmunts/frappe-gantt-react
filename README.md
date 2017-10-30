@@ -26,14 +26,23 @@ Then you can use it in your react app:
 
 `
 class App extends React.Component {
+
     ...
+    
     render() {
+    
         return (
+    
             ...
+    
             <FrappeGantt tasks={ ... }>
+    
             ...
+    
         )
+    
     }
+
 }
 `
 
