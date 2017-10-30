@@ -1,18 +1,29 @@
 # Frappé Gantt React Wrapper
 
+It's a React Component, a Wrapper for the awesome (Gantt chart library)[https://github.com/frappe/gantt] from Frappé
+
+For the live demo, you can check their live demo (here)[https://frappe.github.io/gantt/]
+
 ## Install
 > npm install frappe-gantt-react
+
 or
+
 > npm install frappe-gantt-react
 
 ## Usage
 Import it to your project
+
 Using ES6 modules
+
 `import { FrappeGantt } from 'frappe-gantt-react`
+
 Or using CommonJS
+
 `const { FrappeGantt } = require('frappe-gantt-react') `
 
 Then you can use it in your react app:
+
 `
 class App extends React.Component {
     ...
