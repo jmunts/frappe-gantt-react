@@ -1,6 +1,18 @@
 {
   "name": "frappe-gantt-react",
   "version": "0.0.7",
+  "author": {
+    "name": "Mohammed Abdulkereem",
+    "email": "mohammed-io@outlook.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mohammed-io/frappe-gantt-react"
+  },
+  "bugs": {
+    "url": "https://github.com/mohammed-io/frappe-gantt-react/issues"
+  },
+  "license": "MIT",
   "typings": "./dist/index.d.ts",
   "scripts": {
     "build": "webpack --config webpack.config.babel.js",
