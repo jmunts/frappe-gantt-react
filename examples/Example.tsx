@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { FrappeGantt, Task } from '../src/index';
+import { FrappeGantt, Task, ViewMode } from '../src/index';
 
 const tasks = [
     {
@@ -8,7 +8,7 @@ const tasks = [
         name: 'Redesign website',
         start: '2016-12-28',
         end: '2016-12-31',
-        progress: 20,
+        progress: 10,
         dependencies: ''
     },
     {
@@ -24,14 +24,21 @@ const tasks = [
         name: 'Redesign website',
         start: '2016-12-28',
         end: '2016-12-31',
-        progress: 20,
+        progress: 0,
         dependencies: 'Task 2, Task 1'
     }
 ]
 
-class Example extends React.Component {
+class Example extends React.Component<any, any> {
     constructor(props) {
         super(props);
+
+        this.state = {mode: ViewMode.HalfDay};
+                
+        setTimeout(() => {
+            console.log("Setting State!");
+            this.setState({mode: ViewMode.Month});
+        }, 3000);
     }
 
     componentDidMount() {
@@ -41,7 +48,7 @@ class Example extends React.Component {
     render() {
         return (
             <div>
-                <FrappeGantt tasks={tasks} />
+                <FrappeGantt tasks={tasks} viewMode={this.state.mode} />
             </div>
         )
     }
