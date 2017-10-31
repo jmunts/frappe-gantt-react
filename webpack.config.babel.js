@@ -43,10 +43,6 @@ export default () => ({
                 loader: 'style-loader!css-loader',
             },
             {
-                test: require.resolve('snapsvg'),
-                loader: 'imports-loader?this=>window,fix=>module.exports=0'
-            },
-            {
                 test: /\.tsx?$/,
                 use: 'awesome-typescript-loader',
             },
