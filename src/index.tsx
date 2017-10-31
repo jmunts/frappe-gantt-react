@@ -4,11 +4,6 @@ import * as Gantt from "frappe-gantt";
 import { AppContainer } from "react-hot-loader";
 import { Moment } from "moment";
 
-declare var global: any;
-global.eve = require("eve");
-global.Snap = require("snapsvg");
-global.moment = require("moment");
-
 export class Task {
     private _dependencies?: string[];
 
@@ -16,7 +11,16 @@ export class Task {
     name: string;
     start: string;
     end: string;
+    
+    /**
+     * Progress in percentage
+     */
     progress: number;
+
+    /**
+     * A css custom class for the task chart bar
+     */
+    custom_class?: string;
 
     setDependencies?(value: string[]) {
         this._dependencies = value;
@@ -41,6 +45,7 @@ export enum ViewMode {
 
 export interface FrappeGanttProps {
     tasks: Task[];
+    viewMode?: ViewMode;
     onTasksChange?: (tasks: Task[]) => void;
     onClick?: (task: Task) => void;
     onDateChange?: (task: Task, start: Moment, end: Moment) => void;
@@ -51,29 +56,30 @@ export interface FrappeGanttProps {
 export class FrappeGantt extends React.Component<FrappeGanttProps, any> {
     private _target: HTMLDivElement;
     private _svg: SVGElement;
+    private _gantt: any;
+
+    componentWillReceiveProps() {
+        if (this._gantt) {
+            this._gantt.change_view_mode(this.props.viewMode);
+        }
+    }
 
     componentDidMount() {
-        setTimeout(() => {
-            try {
-                new Gantt(this._svg, [].concat(this.props.tasks), {
-                    on_click: this.props.onClick,
-                    on_view_change: this.props.onViewChange,
-                    on_progress_change: (task: Task, progress: number) => {
-                        (this.props.onProgressChange || function(a, b) {})(task, progress);
-                        (this.props.onTasksChange || function(a) {})([].concat(this.props.tasks));
-                    },
-                    on_date_change: (task: Task, start: Moment, end: Moment) => {
-                        (this.props.onDateChange || function(a, b, c) {})(task, start, end);
-                        (this.props.onTasksChange || function(a) {})([].concat(this.props.tasks));
-                    }
-                });
-            } catch (e) {
-
-            } finally {
-                const midOfSvg = this._svg.clientWidth * 0.5;
-                this._target.scrollLeft = midOfSvg;
+        this._gantt = new Gantt(this._svg, this.props.tasks, {
+            on_click: this.props.onClick,
+            on_view_change: this.props.onViewChange,
+            on_progress_change: (task: Task, progress: number) => {
+                (this.props.onProgressChange || function (a, b) { })(task, progress);
+                (this.props.onTasksChange || function (a) { })([].concat(this.props.tasks));
+            },
+            on_date_change: (task: Task, start: Moment, end: Moment) => {
+                (this.props.onDateChange || function (a, b, c) { })(task, start, end);
+                (this.props.onTasksChange || function (a) { })([].concat(this.props.tasks));
             }
         });
+
+        const midOfSvg = this._svg.clientWidth * 0.5;
+        this._target.scrollLeft = midOfSvg;
     }
 
     render() {
