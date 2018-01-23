@@ -67,7 +67,7 @@ var FrappeGantt = /** @class */ (function (_super) {
     };
     FrappeGantt.prototype.componentDidMount = function () {
         var _this = this;
-        this._gantt = new Gantt(this._svg, this.props.tasks, {
+        this._gantt = new Gantt("#" + this.props.idName, this.props.tasks, {
             on_click: this.props.onClick,
             on_view_change: this.props.onViewChange,
             on_progress_change: function (task, progress) {
@@ -85,7 +85,7 @@ var FrappeGantt = /** @class */ (function (_super) {
     FrappeGantt.prototype.render = function () {
         var _this = this;
         return (React.createElement("div", { style: { overflow: "scroll" }, ref: function (r) { return _this._target = r; } },
-            React.createElement("svg", { ref: function (r) { return _this._svg = r; }, width: "100%", height: "100%", xmlns: "http://www.w3.org/2000/svg", xmlnsXlink: "http://www.w3.org/1999/xlink" })));
+            React.createElement("svg", { ref: function (r) { return _this._svg = r; }, id: this.props.idName, width: "100%", height: "100%", xmlns: "http://www.w3.org/2000/svg", xmlnsXlink: "http://www.w3.org/1999/xlink" })));
     };
     return FrappeGantt;
 }(React.Component));

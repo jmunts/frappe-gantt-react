@@ -27,6 +27,7 @@ export declare enum ViewMode {
     Month = "Month",
 }
 export interface FrappeGanttProps {
+    idName: string;
     tasks: Task[];
     viewMode?: ViewMode;
     onTasksChange?: (tasks: Task[]) => void;

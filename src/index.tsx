@@ -44,6 +44,7 @@ export enum ViewMode {
 }
 
 export interface FrappeGanttProps {
+    idName: string;
     tasks: Task[];
     viewMode?: ViewMode;
     onTasksChange?: (tasks: Task[]) => void;
@@ -65,7 +66,7 @@ export class FrappeGantt extends React.Component<FrappeGanttProps, any> {
     }
 
     componentDidMount() {
-        this._gantt = new Gantt(this._svg, this.props.tasks, {
+        this._gantt = new Gantt(`#${this.props.idName}`, this.props.tasks, {
             on_click: this.props.onClick,
             on_view_change: this.props.onViewChange,
             on_progress_change: (task: Task, progress: number) => {
@@ -86,6 +87,7 @@ export class FrappeGantt extends React.Component<FrappeGanttProps, any> {
         return (
             <div style={{ overflow: "scroll" }} ref={r => this._target = r}>
                 <svg ref={r => this._svg = r}
+                    id={this.props.idName}
                     width="100%"
                     height="100%"
                     xmlns="http://www.w3.org/2000/svg"
